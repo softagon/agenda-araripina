@@ -1,0 +1,184 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agenda Telefônica de Araripina Pernambuco</title>
+    <link rel="stylesheet" href="themes/agenda.min.css" />
+    <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+    <script src="config.js" type="application/javascript"></script>
+    <script src="agenda.js" type="application/javascript"></script>
+    <script src="noticias.js" type="application/javascript"></script>
+    <script src="contato.js" type="application/javascript"></script>
+</head>
+<body>
+
+<div data-role="page" id="homepage">
+
+    <div role="main" class="ui-content">
+        <div id="logo_araripina" align="center">
+            <img src="img/agenda-araripina.png" width="35%" length="35%">
+        </div>
+        <div id="tituloresult"></div>
+        <ul data-role="listview" data-inset="true" id="telefones">
+        </ul>
+        <div class="ui-field-contain">
+            <input type="search" name="inpt-buscar" id="inpt-buscar" value="" placeholder="Telefone de quem?" required="Qual o nome?">
+            <a href="#" id="btn-buscar" class="ui-shadow ui-btn ui-corner-all">Achar Telefone</a>
+        </div>
+
+    </div><!-- /content -->
+
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar" class="ui-state-persist">
+            <ul>
+                <li><a href="#homepage" data-icon="search"  class="ui-btn-active">Agenda</a></li>
+                <li><a href="#noticias" data-icon="bullets">Notícias</a></li>
+                <li><a href="#contato" data-icon="mail">Contato</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /footer -->
+</div><!-- /page -->
+
+<!----------------------------- -->
+<!-- RESULTADOS - OUTRA pÁGINA  -->
+<!----------------------------- -->
+<div data-role="page" id="resultados">
+
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <a href="#homepage" class="ui-btn-left" data-transition="slide" data-direction="reverse">Voltar</a>
+        <h3>
+            Info da Empresa
+        </h3>
+    </div>
+    <a href="#" class="ui-btn ui-state-disabled ui-mini">Araripina.com.br</a>
+    <div role="main" class="ui-content">
+
+        <ul data-role="listview"  id="detalhes" data-inset="true">
+        </ul>
+
+        <p align="center" id="btn_incorreto"></p>
+    </div><!-- /content -->
+
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar" class="ui-state-persist">
+            <ul>
+                <li><a href="#homepage" data-icon="search"  class="ui-btn-active">Agenda</a></li>
+                <li><a href="#noticias" data-icon="bullets">Notícias</a></li>
+                <li><a href="#contato" data-icon="mail">Contato</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /footer -->
+</div><!-- /page -->
+
+<!----------------------------- -->
+<!-- DADOS Incorretos - OUTRA pÁGINA  -->
+<!----------------------------- -->
+<div data-role="page" id="dados_incorretos">
+
+    <div data-theme="a" data-role="header">
+        <a href="#homepage" class="ui-btn-left" data-transition="slide" data-direction="reverse">Voltar</a>
+        <h3>
+            Dados incorretos
+        </h3>
+    </div>
+    <a href="#" class="ui-btn ui-state-disabled ui-mini">Araripina.com.br</a>
+    <div role="main" class="ui-content">
+
+        <h1>Notificação de dados incorretos</h1>
+        <p>O site de Araripina, Araripina.com.br, foi notificado com sucesso dos dados incorretos
+        desta Empresa <strong id="empresa_incorreta"></strong>.</p>
+
+    </div><!-- /content -->
+
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar" class="ui-state-persist">
+            <ul>
+                <li><a href="#homepage" data-icon="search"  class="ui-btn-active">Agenda</a></li>
+                <li><a href="#noticias" data-icon="bullets">Notícias</a></li>
+                <li><a href="#contato" data-icon="mail">Contato</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /footer -->
+</div><!-- /page -->
+
+<!----------------------------- -->
+<!-- Notícias - OUTRA pÁGINA  -->
+<!----------------------------- -->
+<div data-role="page" id="noticias">
+
+    <div data-theme="a" data-role="header">
+        <a href="#homepage" class="ui-btn-left" data-transition="slide" data-direction="reverse">Voltar</a>
+        <h3>
+            Notícias da Cidade
+        </h3>
+    </div>
+    <a href="#" class="ui-btn ui-state-disabled ui-mini">Araripina.com.br</a>
+    <div role="main" class="ui-content">
+
+        <ul data-role="listview" data-inset="true" id="lista_noticia" data-theme="a">
+
+        </ul>
+
+    </div><!-- /content -->
+
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar" class="ui-state-persist">
+            <ul>
+                <li><a href="#homepage" data-icon="search"  >Agenda</a></li>
+                <li><a href="#noticias" data-icon="bullets" class="ui-btn-active">Notícias</a></li>
+                <li><a href="#contato" data-icon="mail">Contato</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /footer -->
+</div><!-- /page -->
+
+<!----------------------------- -->
+<!-- CONTATO - OUTRA pÁGINA  -->
+<!----------------------------- -->
+<div data-role="page" id="contato">
+
+    <div data-theme="a" data-role="header">
+        <a href="#homepage" class="ui-btn-left" data-transition="slide" data-direction="reverse">Voltar</a>
+        <h3>
+            Contato
+        </h3>
+    </div>
+    <a href="#" class="ui-btn ui-state-disabled ui-mini">Araripina.com.br</a>
+    <div role="main" class="ui-content">
+
+        <form id="contatofrm" name="contatoform" method="post" data-ajax="true">
+            <label for="cliente">Seu nome</label>
+            <input type="text" name="cliente" id="cliente" value="" required>
+            <label for="email">E-mail:</label>
+            <input type="email" data-clear-btn="true" name="email" id="email" value="" required>
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <legend>Tipo de contato:</legend>
+                <input type="radio" name="tipo_contato" id="radio-choice-h-2a" value="Críticas" checked="checked">
+                <label for="radio-choice-h-2a">Críticas</label>
+                <input type="radio" name="tipo_contato" id="radio-choice-h-2c" value="Cad. Telefone">
+                <label for="radio-choice-h-2c">Cad. Telefone</label>
+            </fieldset>
+            <label for="mensagem">Mensagem:</label>
+            <textarea cols="40" rows="8" name="mensagem" id="mensagem" required></textarea>
+            <input type="submit" data-icon="star" value="Enviar">
+        </form>
+
+
+    </div><!-- /content -->
+
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar" class="ui-state-persist">
+            <ul>
+                <li><a href="#homepage" data-icon="search"  >Agenda</a></li>
+                <li><a href="#noticias" data-icon="bullets">Notícias</a></li>
+                <li><a href="#contato" data-icon="mail" class="ui-btn-active">Contato</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /footer -->
+</div><!-- /page -->
+
+</body>
+</html>
