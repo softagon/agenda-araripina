@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <widget xmlns   = "http://www.w3.org/ns/widgets"
-        xmlns:gap   = "http://phonegap.com/ns/1.0"
-        id          = "com.phonegap.araripina"
-        versionCode = "1" 
-        version     = "0.0.1" >
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+            xmlns:gap   = "http://phonegap.com/ns/1.0"
+            id          = "com.phonegap.araripina"
+            versionCode = "1" 
+            version     = "0.0.1" >
 
     <!-- versionCode is optional and Android only -->
-
     <name>Araripina</name>
-
     <description>
         Agenda telefônica de Araripina Pernambuco com notícias e informações da Cidade.
     </description>
@@ -16,5 +14,13 @@
     <author href="http://www.softagon.com.br/fale-com-a-softagon/" email="fale@softagon.com.br">
         Hermes Alves Dias Souza
     </author>
+    <!-- Android Icons -->
+    <icon src="img/drawable-ldpi/ic_launcher.png" gap:platform="android" gap:density="ldpi" />
+    <icon src="img/drawable-mdpi/ic_launcher.png" gap:platform="android" gap:density="mdpi" />
+    <icon src="img/drawable-hdpi/ic_launcher.png" gap:platform="android" gap:density="hdpi" />
+    <icon src="img/drawable-xhdpi/ic_launcher.png" gap:platform="android" gap:density="xhdpi" />
+    <icon src="img/drawable-xxhdpi/ic_launcher.png" gap:platform="android" gap:density="xxhdpi" />
 
+    <content src="index.html" />
+    <access origin="*" />
 </widget>
