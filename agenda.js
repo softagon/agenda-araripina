@@ -1,8 +1,8 @@
 /**
  * Created by hermes on 14/10/14.
  */
-
 $(document).on("pageinit", "#homepage", function () {
+    $.ajaxSetup({ cache: true });
     var buscarurl = endereco + "buscar/";
 
     $('#btn-buscar').on('vclick', function () {
@@ -17,20 +17,26 @@ $(document).on("pageinit", "#homepage", function () {
 
     var buscar = function (palavra) {
         $.getJSON(buscarurl + palavra, function (data) {
-            //Retira a logomarca do site e coloca o endereço
-            $('#logo_araripina').empty();
-            $('#logo_araripina').append('<a href="#" class="ui-btn ui-state-disabled ui-mini">Araripina.com.br</a>');
+            console.log(data + '');
+            if (data) {
+                //Retira a logomarca do site e coloca o endereço
+                $('#logo_araripina').empty();
+                $('#logo_araripina').append('<a href="#" class="ui-btn ui-state-disabled ui-mini">Araripina.com.br</a>');
 
-            //Exibe na tela o que o cliente pesquisou na agenda
-            $('#tituloresult').empty();
-            $('#tituloresult').append('<h1>Pesquisou por ' + palavra + '</h1>');
+                //Exibe na tela o que o cliente pesquisou na agenda
+                $('#tituloresult').empty();
+                $('#tituloresult').append('<h1>Pesquisou por ' + palavra + '</h1>');
 
-            //Exibe os resultados da pesquisa
-            $('#telefones').empty();
-            $.each(data, function (i, row) {
-                $('#telefones').append('<li><a href="#" data-id="' + row.ID + '"><h2>' + row.post_title + '</h2><p> Atualizado em: ' + row.modificado + '</p></a></li>');
-                $('#telefones').listview('refresh');
-            });
+                //Exibe os resultados da pesquisa
+                $('#telefones').empty();
+                $.each(data, function (i, row) {
+                    $('#telefones').append('<li><a href="#" data-id="' + row.ID + '"><h2>' + row.post_title + '</h2><p> Atualizado em: ' + row.modificado + '</p></a></li>');
+                    $('#telefones').listview('refresh');
+                });
+            } else {
+                $('#telefones').empty();
+                $('#telefones').append('<br/>&nbsp;&nbsp;&nbsp;Não foi encontrada nada com a palavra <strong>' + palavra + '</strong>, tente uma palavra similar.<br/><br/>');
+            }
         });
     };
     //Link(btn) para visualizar mais informações da Empresa
@@ -42,6 +48,7 @@ $(document).on("pageinit", "#homepage", function () {
 });
 //Exibe detalhes de UMA empresa selecionada
 $(document).on('pagebeforeshow', '#resultados', function () {
+    $.ajaxSetup({ cache: true });
     var pegaurl = endereco + "empresa/";
 
 

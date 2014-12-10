@@ -1,26 +1,81 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<widget xmlns   = "http://www.w3.org/ns/widgets"
-            xmlns:gap   = "http://phonegap.com/ns/1.0"
-            id          = "com.phonegap.araripina"
-            versionCode = "1" 
-            version     = "0.0.1" >
-
-    <!-- versionCode is optional and Android only -->
-    <name>Araripina</name>
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+                xmlns:gap = "http://phonegap.com/ns/1.0"
+                id        = "br.com.softagon.araripina"
+                versionCode="1"
+                version   = "0.0.2">
+    <name>Araripina Agenda</name>
     <description>
-        Agenda telefônica de Araripina Pernambuco com notícias e informações da Cidade.
-    </description>
-
-    <author href="http://www.softagon.com.br/fale-com-a-softagon/" email="fale@softagon.com.br">
-        Hermes Alves Dias Souza
+        Agenda com todos os telefones de Araripina Pernambuco, e notícias dessa Cidade querida.		</description>
+    <author href="http://www.softagon.com.br" email="fale@softagon.com.br">
+        Hermes Souza
     </author>
-    <!-- Android Icons -->
-    <icon src="img/drawable-ldpi/ic_launcher.png" gap:platform="android" gap:density="ldpi" />
-    <icon src="img/drawable-mdpi/ic_launcher.png" gap:platform="android" gap:density="mdpi" />
-    <icon src="img/drawable-hdpi/ic_launcher.png" gap:platform="android" gap:density="hdpi" />
-    <icon src="img/drawable-xhdpi/ic_launcher.png" gap:platform="android" gap:density="xhdpi" />
-    <icon src="img/drawable-xxhdpi/ic_launcher.png" gap:platform="android" gap:density="xxhdpi" />
-
+    <preference name="phonegap-version" value="3.6.3" />
+    <preference name="orientation" value="default" />
+    <preference name="fullscreen" value="false" />
+    <preference name="target-device" value="universal" />
+    <preference name="webviewbounce" value="true" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="stay-in-webview" value="true" />
+    <preference name="ios-statusbarstyle" value="default" />
+    <preference name="detect-data-types" value="true" />
+    <preference name="exit-on-suspend" value="false" />
+    <preference name="show-splash-screen-spinner" value="true" />
+    <preference name="auto-hide-splash-screen" value="true" />
+    <preference name="EnableViewportScale" value="true" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="AllowInlineMediaPlayback" value="false" />
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="TopActivityIndicator" value="gray" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <preference name="HideKeyboardFormAccessoryBar" value="false" />
+    <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="android-minSdkVersion" value="7" />
+    <preference name="android-installLocation" value="internalOnly" />
+    <preference name="SplashScreenDelay" value="5000" />
+    <preference name="ErrorUrl" value=""/>
+    <preference name="BackgroundColor" value="0x000000"/>
+    <preference name="KeepRunning" value="true"/>
+    <preference name="DisallowOverscroll" value="false"/>
+    <preference name="LoadingDialog" value=","/> 
+    <preference name="LoadUrlTimeoutValue" value="20000" />
+    <preference name="disable-cursor" value="false" />
+    <gap:platform name="ios" />
+    <gap:platform name="android" />
+    <gap:platform name="winphone" />
+    <feature name="http://api.phonegap.com/1.0/network"/>
+    <feature name="http://api.phonegap.com/1.0/network"/>
+    <icon src="img/icones/57.png" gap:platform="ios" width="57" height="57" />
+    <icon src="img/icones/72.png" gap:platform="ios" width="72" height="72" />
+    <icon src="img/icones/114.png" gap:platform="ios" width="114" height="114" />
+    <icon src="img/icones/144.png" gap:platform="ios" width="144" height="144" />
+    <icon src="img/icones/appicon-76@2x.png" gap:platform="ios" width="76" height="76" />
+    <icon src="img/icones/120.png" gap:platform="ios" width="120" height="120" />
+    <icon src="img/icones/152.png" gap:platform="ios" width="152" height="152" />
+    <icon src="img/icones/36.png" gap:platform="android" gap:density="ldpi" />
+    <icon src="img/icones/48.png" gap:platform="android" gap:density="mdpi" />
+    <icon src="img/icones/72.png" gap:platform="android" gap:density="hdpi" />
+    <icon src="img/icones/96.png" gap:platform="android" gap:density="xhdpi" />
+    <icon src="img/icones/144.png" gap:platform="android" gap:density="xxhdpi" />
+    <icon src="img/icones/192.png" gap:platform="android" gap:density="xxxhdpi" />
+    <icon src="img/icones/62.png" gap:platform="winphone" />
+    <icon src="img/icones/173.png" gap:platform="winphone" gap:role="background" />
+    <icon src="icon.png" />
+    <gap:splash src="img/splash/320x480.png" gap:platform="ios" width="320" height="480" />
+    <gap:splash src="img/splash/480x320d.png" gap:platform="ios" width="480" height="320" />
+    <gap:splash src="img/splash/640x960.png" gap:platform="ios" width="640" height="960" />
+    <gap:splash src="img/splash/960x640d.png" gap:platform="ios" width="960" height="640" />
+    <gap:splash src="img/splash/640x1136.png" gap:platform="ios" width="640" height="1136" />
+    <gap:splash src="img/splash/1136x640d.png" gap:platform="ios" width="1136" height="640" />
+    <gap:splash src="img/splash/768x1024.png" gap:platform="ios" width="768" height="1024 " />
+    <gap:splash src="img/splash/1024x768d.png" gap:platform="ios" width="1024" height="768" />
+    <gap:splash src="img/splash/240x400.png" gap:platform="android" gap:density="ldpi" />
+    <gap:splash src="img/splash/320x480.png" gap:platform="android" gap:density="mdpi" />
+    <gap:splash src="img/splash/480x800.png" gap:platform="android" gap:density="hdpi" />
+    <gap:splash src="img/splash/720x960.png" gap:platform="android" gap:density="xhdpi" />
+    <gap:splash src="img/splash/1080x1920.png" gap:platform="android" gap:density="xxhdpi" />
+    <gap:splash src="img/splash/480x800.png" gap:platform="winphone" />
+    <gap:splash src="splash.png" />
     <content src="index.html" />
-    <access origin="*" />
+    <access origin="http://www.araripina.com.br" subdomains="true"  />
 </widget>
