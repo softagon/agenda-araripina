@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "com.phonegap.araripina"
+        versionCode = "1" 
+        version     = "0.0.1" >
+
+    <!-- versionCode is optional and Android only -->
+
+    <name>Araripina</name>
+
+    <description>
+        Agenda telefônica de Araripina Pernambuco com notícias e informações da Cidade.
+    </description>
+
+    <author href="http://www.softagon.com.br/fale-com-a-softagon/" email="fale@softagon.com.br">
+        Hermes Alves Dias Souza
+    </author>
+
+</widget>
