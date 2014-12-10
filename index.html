@@ -5,9 +5,9 @@
     <title>Agenda Telefônica de Araripina Pernambuco</title>
     <link rel="stylesheet" href="themes/agenda.min.css" />
     <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+    <link rel="stylesheet" href="themes/app/jquery.mobile.structure-1.4.3.min.css" />
+    <script src="themes/app/jquery-1.11.1.min.js" type="application/javascript"></script>
+    <script src="themes/app/jquery.mobile-1.4.3.min.js" type="application/javascript"></script>
     <script src="config.js" type="application/javascript"></script>
     <script src="agenda.js" type="application/javascript"></script>
     <script src="noticias.js" type="application/javascript"></script>
@@ -48,7 +48,7 @@
 <div data-role="page" id="resultados">
 
     <div data-theme="a" data-role="header" data-position="fixed">
-        <a href="#homepage" class="ui-btn-left" data-transition="slide" data-direction="reverse">Voltar</a>
+        <a href="#homepage" class="ui-btn-left" id="btn-voltar" data-transition="slide" data-direction="reverse">Voltar</a>
         <h3>
             Info da Empresa
         </h3>
@@ -59,7 +59,7 @@
         <ul data-role="listview"  id="detalhes" data-inset="true">
         </ul>
 
-        <p align="center" id="btn_incorreto"></p>
+        <div id="btn_incorreto"></div>
     </div><!-- /content -->
 
     <div data-role="footer" data-position="fixed">
@@ -79,7 +79,7 @@
 <div data-role="page" id="dados_incorretos">
 
     <div data-theme="a" data-role="header">
-        <a href="#homepage" class="ui-btn-left" data-transition="slide" data-direction="reverse">Voltar</a>
+        <a href="#homepage" class="ui-btn-left" id="btn-voltar" data-transition="slide" data-direction="reverse">Voltar</a>
         <h3>
             Dados incorretos
         </h3>
