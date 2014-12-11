@@ -28,7 +28,6 @@ $(document).on("pageinit", "#homepage", function () {
 
     var buscar = function (palavra) {
         $.getJSON(buscarurl + palavra, function (data) {
-            console.log(data + '');
             if (data) {
                 //Retira a logomarca do site e coloca o endereço
                 $('#logo_araripina').empty();
@@ -63,26 +62,73 @@ $(document).on("pageinit", "#homepage", function () {
 $(document).on('pagebeforeshow', '#resultados', function () {
     $.ajaxSetup({cache: true});
     var pegaurl = endereco + "empresa/";
+    var cnt = {};
 
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        console.log(navigator.contacts);
+    }
 
     $.getJSON(pegaurl + telefoneid, function (data) {
         $('#detalhes').empty();
         $.each(data, function (i, valor) {
-            if (valor.post_title && valor.address)
+            if (valor.post_title && valor.address) {
                 $('#detalhes').append('<li><h1>' + valor.post_title + '</h1><p>' + valor.address + '</p></li>');
-            if (valor.telephone)
+                cnt.nome = valor.post_title;
+                cnt.endereco = valor.address;
+            }
+            if (valor.telephone) {
                 $('#detalhes').append('<li data-icon="false"><a class="ui-btn ui-btn-inline ui-icon-phone ui-btn-icon-left"  href="tel:' + valor.telephone + '">' + valor.telephone + '</a></li>');
-            if (valor.web)
+                cnt.telefone = valor.telephone;
+            }
+            if (valor.web) {
                 $('#detalhes').append('<li data-icon="false"><a class="ui-btn ui-btn-inline ui-icon-navigation ui-btn-icon-left"  href="http://' + valor.web + '">' + valor.web + '</a></li>');
-            if (valor.email)
+                cnt.site = valor.web;
+            }
+            if (valor.email) {
                 $('#detalhes').append('<li data-icon="false"><a class="ui-btn ui-btn-inline ui-icon-mail ui-btn-icon-left"  href="mailto:' + valor.email + '">' + valor.email + '</a></li>');
-
+                cnt.email = valor.email;
+            }
             $('#detalhes').append('<li>Atualizado em: ' + valor.modificado + '</li>');
             $('#detalhes').listview('refresh');
 
             $('#btn_incorreto').replaceWith('<div id="btn_incorreto"><center><button data-empresa="' + valor.post_title + '" data-id="' + valor.id + '" id="btn_incorreto_ntf">Dados incorretos?</button></center></div>');
         });
+
+        $('#btn-salvar').bind('click', function () {
+            saveContact(cnt);
+        });
+
     });
+
+    function saveContact(cnt) {
+        console.log('Getting Contact Info...');
+        //Create variables from form input
+        var fullName = cnt.nome;
+        var note = "Salvo via Araripina Agenda aplicativo do Araripina.com.br";
+        var emailAddress = cnt.email;
+        //Create contact object
+        var theContact = navigator.contacts.create({"displayName": fullName});
+        theContact.note = note;
+        theContact.urls = cnt.site;
+        var emails = [];
+        emails[0] = new ContactField('email', emailAddress, false);
+        theContact.emails = emails;
+        var addresses = [];
+        addresses[0] = new ContactField('addresses', cnt.endereco, false);
+        theContact.addresses = addresses;
+        var phoneNumbers = [];
+        phoneNumbers[0] = new ContactField('phoneNumbers', cnt.telefone, false);
+        theContact.phoneNumbers = phoneNumbers;
+        //Save contact info   
+        theContact.save(onSaveSuccess, onSaveError);
+    }
+    function onSaveSuccess(contact) {
+        alert('Salvamos o contato no direto no seu telefone');
+    }
+    function onSaveError(error) {
+        alert('Error: ' + error.code);
+    }
 
     //Link(btn) para NOTIFICAR dados incorretos
     $(document).on('vclick', '#btn_incorreto_ntf', function () {
@@ -101,10 +147,10 @@ $(document).on('pagebeforeshow', '#dados_incorretos', function () {
     $.post(incorretourl + empresaid, {id: empresaid, title: empresatitle})
             .done(function () {
                 $('#empresa_incorreta').replaceWith('<strong id="empresa_incorreta">' + empresatitle + '</strong>');
-                console.log("Funcionou " + empresatitle);
+//                console.log("Funcionou " + empresatitle);
             })
             .fail(function (xhr, textStatus, errorThrown) {
-                console.log("Falhou no ID " + empresaid + "E na Empresa " + empresatitle + "Error" + xhr.responseText);
+//                console.log("Falhou no ID " + empresaid + "E na Empresa " + empresatitle + "Error" + xhr.responseText);
             });
 
 });
