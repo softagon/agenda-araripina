@@ -3,7 +3,7 @@
                 xmlns:gap = "http://phonegap.com/ns/1.0"
                 id        = "br.com.softagon.araripina"
                 versionCode="1"
-                version   = "0.0.2">
+                version   = "0.0.3">
     <name>Araripina Agenda</name>
     <description>
         Agenda com todos os telefones de Araripina Pernambuco, e notícias dessa Cidade querida.		</description>

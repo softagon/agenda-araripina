@@ -2,7 +2,7 @@
  * Created by hermes on 14/10/14.
  */
 $(document).on("pageinit", "#homepage", function () {
-    $.ajaxSetup({ cache: true });
+    $.ajaxSetup({cache: true});
     var buscarurl = endereco + "buscar/";
 
     $('#btn-buscar').on('vclick', function () {
@@ -10,9 +10,20 @@ $(document).on("pageinit", "#homepage", function () {
         if (palavra) {
             buscar(palavra);
         } else {
-            alert("Em branco");
+            alert("Por favor, digite uma palavra antes de clicar em buscar");
         }
 
+    });
+
+    $("#inpt-buscar").keypress(function (event) {
+        if (event.which == 13) {
+            var palavra = $('#inpt-buscar').val();
+            if (palavra) {
+                buscar(palavra);
+            } else {
+                alert("Por favor, digite uma palavra antes de clicar em buscar");
+            }
+        }
     });
 
     var buscar = function (palavra) {
@@ -35,6 +46,8 @@ $(document).on("pageinit", "#homepage", function () {
                 });
             } else {
                 $('#telefones').empty();
+                $('#tituloresult').empty();
+                $('#tituloresult').append('<h1>Pesquisou por ' + palavra + '</h1>');
                 $('#telefones').append('<br/>&nbsp;&nbsp;&nbsp;Não foi encontrada nada com a palavra <strong>' + palavra + '</strong>, tente uma palavra similar.<br/><br/>');
             }
         });
@@ -48,7 +61,7 @@ $(document).on("pageinit", "#homepage", function () {
 });
 //Exibe detalhes de UMA empresa selecionada
 $(document).on('pagebeforeshow', '#resultados', function () {
-    $.ajaxSetup({ cache: true });
+    $.ajaxSetup({cache: true});
     var pegaurl = endereco + "empresa/";
 
 
