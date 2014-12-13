@@ -35,9 +35,7 @@
     <feature name="http://api.phonegap.com/1.0/notification"/>
     
     <gap:plugin name="de.cameonet.cordova.contacts" version="0.2.13" />
-    <gap:plugin name="fork.cordova.file" version="1.2.1" />
-    <gap:plugin name="com.badrit.fileoperations" version="0.1.0" />
-  
+    
     <icon src="img/icones/57.png" gap:platform="ios" width="57" height="57" />
     <icon src="img/icones/72.png" gap:platform="ios" width="72" height="72" />
     <icon src="img/icones/114.png" gap:platform="ios" width="114" height="114" />
