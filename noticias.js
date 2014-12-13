@@ -3,21 +3,15 @@
  */
 var notijson = "https://query.yahooapis.com/v1/public/yql?q=select%20title%2C%20link%2C%20pubDate%20from%20rss%20where%20url%3D'http%3A%2F%2Fwww.araripina.com.br%2Ffeed'%20LIMIT%2010&format=json&callback=";
 
-$(document).on('pagebeforecreate', '#noticias', function(){
-    $.ajaxSetup({ cache: true });
-    pega_noticias();
-
-    var interval = setInterval(function(){
-        $.mobile.loading('show',{
-            text: "Coletando notícias",
-                textVisible: true,
-                theme: "z"
-        });
-        clearInterval(interval);
-    },1);
-
-    function pega_noticias() {
-        $.getJSON(notijson, function (data) {
+$(document).on('pageshow', '#noticias', function () {
+    $.ajaxSetup({cache: true});
+    $("#loading").show();
+    $.ajax({
+        type: "GET",
+        url: notijson,
+        dataType: 'json',
+        async: false,
+        success: function (data) {
             $('#lista_noticia').empty();
 
             $.each(data.query.results.item, function (i, valor) {
@@ -31,17 +25,8 @@ $(document).on('pagebeforecreate', '#noticias', function(){
                 $('#lista_noticia').listview('refresh');
 
             });
-        });
-    }
-});
-
-$(document).on('pageshow', '#noticias', function(){
-    var interval = setInterval(function(){
-        $.mobile.loading('hide');
-        clearInterval(interval);
-    },3500);
-
-
-
+            $("#loading").hide();
+        }
+    });
 
 });

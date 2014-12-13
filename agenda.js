@@ -27,30 +27,40 @@ $(document).on("pageinit", "#homepage", function () {
     });
 
     var buscar = function (palavra) {
-        $.getJSON(buscarurl + palavra, function (data) {
-            if (data) {
-                //Retira a logomarca do site e coloca o endereço
-                $('#logo_araripina').empty();
-                $('#logo_araripina').append('<a href="#" class="ui-btn ui-state-disabled ui-mini">Araripina.com.br</a>');
+        $.ajax({
+            type: "GET",
+            url: buscarurl + palavra,
+            dataType: 'json',
+            async: false,
+            beforeSend: function (xhr) {
+                $("#loadingres").show();
+            },
+            success: function (data) {
+                if (data) {
+                    //Retira a logomarca do site e coloca o endereço
+                    $('#logo_araripina').empty();
+                    $('#logo_araripina').append('<a href="#" class="ui-btn ui-state-disabled ui-mini">Araripina.com.br</a>');
 
-                //Exibe na tela o que o cliente pesquisou na agenda
-                $('#tituloresult').empty();
-                $('#tituloresult').append('<h1>Pesquisou por ' + palavra + '</h1>');
+                    //Exibe na tela o que o cliente pesquisou na agenda
+                    $('#tituloresult').empty();
+                    $('#tituloresult').append('<h1>Pesquisou por ' + palavra + '</h1>');
 
-                //Exibe os resultados da pesquisa
-                $('#telefones').empty();
-                $.each(data, function (i, row) {
-                    $('#telefones').append('<li><a href="#" data-id="' + row.ID + '"><h2>' + row.post_title + '</h2><p> Atualizado em: ' + row.modificado + '</p></a></li>');
-                    $('#telefones').listview('refresh');
-                });
-            } else {
-                $('#telefones').empty();
-                $('#tituloresult').empty();
-                $('#tituloresult').append('<h1>Pesquisou por ' + palavra + '</h1>');
-                $('#telefones').append('<br/>&nbsp;&nbsp;&nbsp;Não foi encontrada nada com a palavra <strong>' + palavra + '</strong>, tente uma palavra similar.<br/><br/>');
+                    //Exibe os resultados da pesquisa
+                    $('#telefones').empty();
+                    $.each(data, function (i, row) {
+                        $('#telefones').append('<li><a href="#" data-id="' + row.ID + '"><h2>' + row.post_title + '</h2><p> Atualizado em: ' + row.modificado + '</p></a></li>');
+                        $('#telefones').listview('refresh');
+                    });
+                } else {
+                    $('#telefones').empty();
+                    $('#tituloresult').empty();
+                    $('#tituloresult').append('<h1>Pesquisou por ' + palavra + '</h1>');
+                    $('#telefones').append('<br/>&nbsp;&nbsp;&nbsp;Não foi encontrada nada com a palavra <strong>' + palavra + '</strong>, tente uma palavra similar.<br/><br/>');
+                }
+                $("#loadingres").hide();
             }
         });
-    };
+    }
     //Link(btn) para visualizar mais informações da Empresa
     $(document).on('vclick', '#telefones li a', function () {
         telefoneid = $(this).attr('data-id');
@@ -59,46 +69,48 @@ $(document).on("pageinit", "#homepage", function () {
 
 });
 //Exibe detalhes de UMA empresa selecionada
-$(document).on('pagebeforeshow', '#resultados', function () {
+$(document).on('pageshow', '#resultados', function () {
     $.ajaxSetup({cache: true});
     var pegaurl = endereco + "empresa/";
     var cnt = {};
 
-    document.addEventListener("deviceready", onDeviceReady, false);
-    function onDeviceReady() {
-        console.log(navigator.contacts);
-    }
+    $("#loadingemp").show();
+    $.ajax({
+        type: "GET",
+        url: pegaurl + telefoneid,
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            $('#detalhes').empty();
+            $.each(data, function (i, valor) {
+                if (valor.post_title && valor.address) {
+                    $('#detalhes').append('<li><h1>' + valor.post_title + '</h1><p>' + valor.address + '</p></li>');
+                    cnt.nome = valor.post_title;
+                    cnt.endereco = valor.address;
+                }
+                if (valor.telephone) {
+                    $('#detalhes').append('<li data-icon="false"><a class="ui-btn ui-btn-inline ui-icon-phone ui-btn-icon-left"  href="tel:' + valor.telephone + '">' + valor.telephone + '</a></li>');
+                    cnt.telefone = valor.telephone;
+                }
+                if (valor.web) {
+                    $('#detalhes').append('<li data-icon="false"><a class="ui-btn ui-btn-inline ui-icon-navigation ui-btn-icon-left"  href="http://' + valor.web + '">' + valor.web + '</a></li>');
+                    cnt.site = valor.web;
+                }
+                if (valor.email) {
+                    $('#detalhes').append('<li data-icon="false"><a class="ui-btn ui-btn-inline ui-icon-mail ui-btn-icon-left"  href="mailto:' + valor.email + '">' + valor.email + '</a></li>');
+                    cnt.email = valor.email;
+                }
+                $('#detalhes').append('<li>Atualizado em: ' + valor.modificado + '</li>');
+                $('#detalhes').listview('refresh');
 
-    $.getJSON(pegaurl + telefoneid, function (data) {
-        $('#detalhes').empty();
-        $.each(data, function (i, valor) {
-            if (valor.post_title && valor.address) {
-                $('#detalhes').append('<li><h1>' + valor.post_title + '</h1><p>' + valor.address + '</p></li>');
-                cnt.nome = valor.post_title;
-                cnt.endereco = valor.address;
-            }
-            if (valor.telephone) {
-                $('#detalhes').append('<li data-icon="false"><a class="ui-btn ui-btn-inline ui-icon-phone ui-btn-icon-left"  href="tel:' + valor.telephone + '">' + valor.telephone + '</a></li>');
-                cnt.telefone = valor.telephone;
-            }
-            if (valor.web) {
-                $('#detalhes').append('<li data-icon="false"><a class="ui-btn ui-btn-inline ui-icon-navigation ui-btn-icon-left"  href="http://' + valor.web + '">' + valor.web + '</a></li>');
-                cnt.site = valor.web;
-            }
-            if (valor.email) {
-                $('#detalhes').append('<li data-icon="false"><a class="ui-btn ui-btn-inline ui-icon-mail ui-btn-icon-left"  href="mailto:' + valor.email + '">' + valor.email + '</a></li>');
-                cnt.email = valor.email;
-            }
-            $('#detalhes').append('<li>Atualizado em: ' + valor.modificado + '</li>');
-            $('#detalhes').listview('refresh');
+                $('#btn_incorreto').replaceWith('<div id="btn_incorreto"><center><button data-empresa="' + valor.post_title + '" data-id="' + valor.id + '" id="btn_incorreto_ntf">Dados incorretos?</button></center></div>');
+            });
 
-            $('#btn_incorreto').replaceWith('<div id="btn_incorreto"><center><button data-empresa="' + valor.post_title + '" data-id="' + valor.id + '" id="btn_incorreto_ntf">Dados incorretos?</button></center></div>');
-        });
-
-        $('#btn-salvar').bind('click', function () {
-            saveContact(cnt);
-        });
-
+            $('#btn-salvar').bind('click', function () {
+                saveContact(cnt);
+            });
+            $("#loadingemp").hide();
+        }
     });
 
     function saveContact(cnt) {
@@ -141,7 +153,7 @@ $(document).on('pagebeforeshow', '#resultados', function () {
 });
 
 
-$(document).on('pagebeforeshow', '#dados_incorretos', function () {
+$(document).on('pageshow', '#dados_incorretos', function () {
 
     var incorretourl = endereco + "incorreto/";
     $.post(incorretourl + empresaid, {id: empresaid, title: empresatitle})
